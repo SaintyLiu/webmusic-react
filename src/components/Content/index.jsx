@@ -18,8 +18,8 @@ import Mv from "../../views/Mv";
 import Search from "../../views/Search";
 import NotFound from "../../views/NotFound";
 
-// import bus from "../../utils/bus";
-// import { getSongUrl } from "../../api/discovery";
+import bus from "../../utils/bus";
+import { getSongUrl } from "../../api/discovery";
 
 export default class Content extends Component {
   constructor() {
@@ -34,20 +34,18 @@ export default class Content extends Component {
 
   componentDidMount() {
     // 播放音乐
-    // bus.on("playMusic", async (id) => {
-    //   const res = await getSongUrl({
-    //     id,
-    //   });
-    //   if (res.data.code === 200) {
-    //     this.setState({
-    //       url: res.data.data[0].url,
-    //     });
-    //   }
-    // });
-    // // 暂停音乐
-    // bus.on("pauseMusic", () => {
-    //   this.audioRef.current.pause();
-    // });
+    bus.on("playMusic", async (id) => {
+      const res = await getSongUrl({ id });
+      if (res.data.code === 200) {
+        this.setState({
+          url: res.data.data[0].url,
+        });
+      }
+    });
+    // 暂停音乐
+    bus.on("pauseMusic", () => {
+      this.audioRef.current.pause();
+    });
   }
 
   render() {

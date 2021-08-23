@@ -8,7 +8,7 @@ export const formatDuration = (duration) =>{
   return min + ':' + sec;
 };
 
-export const formaCount = (count) => {
+export const formatCount = (count) => {
   if(count / 10000 > 10){
     return parseInt(count / 10000) + '万';
   }else{
